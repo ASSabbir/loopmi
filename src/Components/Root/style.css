@@ -1,0 +1,11 @@
+#button {
+    background-color: #afe5cf;
+    background-image: linear-gradient(112deg, #afe5cf 0%, #5f9877 100%);
+
+}
+#button:hover {
+    background-color: #afe5cf;
+    background-image: linear-gradient(112deg,  #5f9877 100%,#afe5cf 0%);
+    
+
+}

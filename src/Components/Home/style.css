@@ -1,0 +1,49 @@
+#home-container {
+    background-color: #ffffff;
+    background-image: linear-gradient(122deg, #ffffff 0%, #cce7d6 100%);
+
+}
+#button {
+    background-color: #afe5cf;
+    background-image: linear-gradient(112deg, #afe5cf 0%, #5f9877 100%);
+
+}
+@keyframes spin-infinite {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .rotate-infinite {
+    animation: spin-infinite 7s linear infinite;
+  }
+  @keyframes jumping {
+    0% {
+      transform: translateY(0px);
+     
+    }
+    25% {
+      transform: translateY(-20px);
+     
+    }
+    50% {
+      transform: translateY(0px);
+     
+    }
+    75% {
+      transform: translateY(20px);
+     
+    }
+    100% {
+      transform: translateY(0px);
+      
+    }
+  }
+  
+  .jump-infinite {
+    
+    animation: jumping 5s linear infinite;
+  }
