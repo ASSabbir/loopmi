@@ -46,7 +46,10 @@ npm run dev
 
 ## 📸 Screenshots
 
-(Include images showcasing homepage, product listing, vendor dashboard, etc.)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ASSabbir/loopmi/refs/heads/main/Captur11e.PNG" alt="Banner Image" />
+</p>
+
 
 ## 👨‍💻 Contributing
 
