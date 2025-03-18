@@ -1,10 +1,11 @@
+import { Link } from "react-router-dom";
 import useItem from "../Root/useItem";
 
 
 const Features = () => {
     const [items] = useItem()
     return (
-        <div className="py-32 h-screen">
+        <div className="py-32 md:h-screen">
             <div className="relative h-full w-full bg-white">
                 {/* Background */}
                 <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] 
@@ -14,8 +15,8 @@ const Features = () => {
                 </div>
 
                 {/* Main Content */}
-                <div className="max-w-screen-2xl h-full mx-auto flex relative z-10 ">
-                    <div className="w-1/2 grid grid-cols-2 gap-5 items-center  self-center">
+                <div className="max-w-screen-2xl h-full mx-auto flex md:flex-row flex-col-reverse relative z-10 ">
+                    <div className="md:w-1/2 grid md:grid-cols-2 gap-5 items-center  self-center">
                         {items?.slice(0, 4).map((item, index) => (
                             <div
                                 key={index}
@@ -54,9 +55,12 @@ const Features = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="w-1/2 flex justify-center flex-col h-full pl-24 ">
-                        <h1 className="text-5xl font-bold mb-7 ">Featured Products</h1>
-                        <h1 className="w-[70%] leading-8 text-xl text-gray-500">Every month, we handpick the best eco-friendly products just for you. Explore this month’s top sustainable picks, curated by our experts!</h1>
+                    <div  className="md:w-1/2 w-full flex justify-center flex-col h-full py-4 md:pl-24  ">
+                        <h1 className="text-5xl font-bold mb-7  md:text-start ">Featured Products</h1>
+                        <h1 className="w-[70%]  leading-8 text-xl text-gray-500">Every month, we handpick the best eco-friendly products just for you. Explore this month’s top sustainable picks, curated by our experts!</h1>
+                        <div className=' flex justify-start  w-full mt-10'>
+                            <Link id='button' className='px-7 py-4  rounded-full text-white' to={'/shop'}><button>View All items</button></Link>
+                        </div>
                     </div>
                 </div>
             </div>

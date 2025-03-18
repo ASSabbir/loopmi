@@ -1,8 +1,9 @@
 
+import { Link } from 'react-router-dom';
 import './style.css'
 const TopPerformance = () => {
     return (
-        <div className="py-32 h-screen">
+        <div className="py-32 md:h-screen">
             <div className="relative h-full w-full bg-white">
                 {/* Background */}
                 <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] 
@@ -12,22 +13,22 @@ const TopPerformance = () => {
                 </div>
 
                 {/* Main Content */}
-                <div className="max-w-screen-2xl h-full mx-auto flex relative z-10 ">
-                    <div className="w-1/2 flex items-center justify-center">
+                <div className="max-w-screen-2xl h-full mx-auto flex flex-col md:flex-row relative z-10 ">
+                    <div className="md:w-1/2 flex items-center justify-center">
                         <div className="relative grid grid-cols-2 gap-2 place-items-center ">
-                            <div className=" flex justify-center items-center flex-col w-72 h-72 rounded-tr-[150px] rounded-bl-[150px] bg-color3">
+                            <div className=" flex justify-center items-center flex-col md:w-72 w-44 h-44 md:h-72 md:rounded-tr-[150px] md:rounded-bl-[150px] bg-color3">
                                 <h1 className="font- text-lg">Total Customers</h1>
                                 <h1 className="font-bold text-2xl">1000+</h1>
                             </div>
-                            <div className="flex justify-center flex-col items-center w-72 h-72 rounded-tl-[150px] rounded-br-[150px] bg-color4">
+                            <div className="flex justify-center flex-col items-center md:w-72 w-44 h-44 md:h-72 md:rounded-tl-[150px] md:rounded-br-[150px] bg-color4">
                                 <h1 className="font- text-lg">Total Sellers</h1>
                                 <h1 className="font-bold text-2xl">500+</h1>
                             </div>
-                            <div className="w-72 flex justify-center flex-col items-center h-72 rounded-tl-[150px] rounded-br-[150px] bg-color5">
+                            <div className="md:w-72 w-44 h-44 flex justify-center flex-col items-center md:h-72 md:rounded-tl-[150px] md:rounded-br-[150px] bg-color5">
                                 <h1 className="font- text-lg">Total Products</h1>
                                 <h1 className="font-bold text-2xl">5000+</h1>
                             </div>
-                            <div className="w-72 flex justify-center flex-col items-center h-72 rounded-tr-[150px] rounded-bl-[150px] bg-color2">
+                            <div className="md:w-72 w-44 h-44 flex justify-center flex-col items-center md:h-72 md:rounded-tr-[150px] md:rounded-bl-[150px] bg-color2">
                                 <h1 className="font- text-lg">Avarage Rating</h1>
                                 <h1 className="font-bold text-2xl">4.8</h1>
                             </div>
@@ -54,9 +55,12 @@ const TopPerformance = () => {
                         </div>
 
                     </div>
-                    <div className="w-1/2 flex justify-center flex-col h-full pl-24 ">
-                        <h1 className="text-5xl font-bold mb-7 ">Top Performance</h1>
+                    <div className="md:w-1/2 flex justify-center flex-col h-full md:pl-24 ">
+                        <h1 className="text-4xl md:text-5xl font-bold mb-7 ">Top Performance</h1>
                         <h1 className="w-[70%] leading-8 text-xl text-gray-500">Every month, we handpick the best eco-friendly products just for you. Explore this month’s top sustainable picks, curated by our experts!</h1>
+                        <div className=' flex justify-start  w-full mt-10'>
+                            <Link id='button' className='px-7 py-4  rounded-full text-white' to={'/shop'}><button>View All items</button></Link>
+                        </div>
                     </div>
                 </div>
             </div>

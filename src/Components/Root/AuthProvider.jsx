@@ -12,10 +12,14 @@ const AuthProvider = ({children}) => {
     const [user,setUser]=useState(null)
     const [loading,setLoading]=useState(true)
     const [watchData,setWatchData]=useState([])
+    const [cartCount,setCartCount]=useState(0)
 
 
-
-    
+    useEffect(()=>{
+        const savedCart=JSON.parse(localStorage.getItem('cart')) || []
+        
+        setCartCount(savedCart.length)
+    },[])
 
       // register 
       const handelSignup=(email,pass)=>{
@@ -51,17 +55,18 @@ const AuthProvider = ({children}) => {
     }
 
     const data={
-        datas,
+        
         loading,
         handelSignup,
         handelSignin,
         user,
-        setDatas,
+        
         logout,
         googleSign,
         handelUpdateUser,
         watchData,
-        setWatchData
+        setWatchData,
+        cartCount,setCartCount
     }
     return (
         <AuthContext.Provider value={data}>

@@ -5,9 +5,9 @@ import axios from "axios";
 const useItem = () => {
    
     const {data:items,isLoading,refetch }=useQuery({
-        queryKey: ['items'],
+        queryKey: ['items','allitems'],
         queryFn: async () => {
-            const res=await axios.get(`https://loopmi-server.vercel.app/carts`);
+            const res=await axios.get(`https://loopmi-server.vercel.app/new_arrivel_cards`);
             return res.data;
         }
     })

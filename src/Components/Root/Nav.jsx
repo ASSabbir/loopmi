@@ -1,5 +1,5 @@
 import './style.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { FaUser } from 'react-icons/fa';
 
@@ -10,14 +10,16 @@ import Swal from 'sweetalert2';
 import { MdDashboard } from 'react-icons/md';
 import useRole from './useRole';
 const Nav = () => {
-    const { user,logout } = useContext(AuthContext)
-    const [users,isLoading] = useRole()
+    const { user, logout, cartCount } = useContext(AuthContext)
+    const navg=useNavigate()
+    const [users, isLoading] = useRole()
     
-    if ( isLoading) {
+    if (isLoading) {
         return <div className='flex items-center justify-center w-full pt-2 h-screen'>
             <span className="loading loading-bars loading-lg"></span>
         </div>
     }
+    console.log(users)
     const Toast = Swal.mixin({
         toast: true,
         position: "top-end",
@@ -25,29 +27,38 @@ const Nav = () => {
         timer: 1000,
         timerProgressBar: true,
         didOpen: (toast) => {
-          toast.onmouseenter = Swal.stopTimer;
-          toast.onmouseleave = Swal.resumeTimer;
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
         }
-      });
+    });
 
     const navlink = <>
-        <li><Link>Home</Link></li>
-        <li><Link>Shop</Link></li>
+        <li><Link to={'/'}>Home</Link></li>
+        <li><Link to={'/shop'}>Shop</Link></li>
+        {users.role == 'Vendor' &&
+           <li> <Link to={'/dashboard/add_item'}  >Vendor Dashboard</Link></li>
+
+        }
+        {users.role == 'Admin' &&
+            <li><Link to={'/admin_panel/admin_view_users'} >Admin Panel</Link></li>
+        }
     </>
 
     const handelLogout = () => {
         logout()
-          .then(() => {
-            Toast.fire({
-              icon: "success",
-              title: `LogOut success`,
-            });
-            localStorage.removeItem('user')
-          })
-          .catch(error => {
-            console.log(error)
-          })
-      }
+            .then(() => {
+                Toast.fire({
+                    icon: "success",
+                    title: `LogOut success`,
+                });
+                localStorage.removeItem('user')
+                navg('/')
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     return (
 
         <div className='fixed w-full bg-white z-50 top-0'>
@@ -85,17 +96,29 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-3">
-                    <Link to={'/login'} id='button' className='p-2 rounded-full text-white text-xl'><IoMdCart /></Link>
-                    {users.role=='Vendor' &&
+                    <Link to={'/cart'} id='button' className='p-2 relative  n rounded-full text-white text-xl'><IoMdCart />
+
+                        {
+                            cartCount > 0 &&
+                            <span className="absolute -top-3 rounded-3xl w-5 h-5 flex justify-center items-center text-sm -right-2  bg-red-400 ">{cartCount}
+                            </span>
+                        }
+                    </Link>
+
+
+                    {/* {users.role == 'Vendor' &&
                         <Link to={'/dashboard/add_item'} id='button' className='p-2 rounded-full text-white text-xl'><MdDashboard /></Link>
-                        
+
                     }
+                    {users.role == 'Admin' &&
+                        <Link to={'/admin_panel/admin_view_users'} id='button' className='px-2 p-1 text-sm rounded-full text-white bg-color4'>Admin Panel</Link>
+                    } */}
                     {
                         user ?
                             <div className="dropdown dropdown-bottom dropdown-end">
                                 <div tabIndex={0} role="button" className=" m-1"><img alt="" className="w-10 h-10 object-cover rounded-full ring-2 ring-offset-4 bg-gray-500 ring-color5 ring-offset-gray-100" src={user.photoURL} /></div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                                    <li><button onClick={handelLogout}>Log Out</button></li> 
+                                    <li><button onClick={handelLogout}>Log Out</button></li>
                                 </ul>
                             </div>
 

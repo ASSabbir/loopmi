@@ -82,6 +82,7 @@ const Register = () => {
                                 title: `WelCome ${auth.currentUser.displayName} `
                             });
                             const user = { email, role }
+                            console.log(user)
                             axios.post('https://loopmi-server.vercel.app/users', user)
                                 .then(res => console.log(res.data))
                                 .catch(error => { console.log(error) })
@@ -151,6 +152,7 @@ const Register = () => {
                                 <select name="role" defaultValue="Student" className="select select-bordered w-full border-2 px-4 py-3 rounded-md border-gray-300 bg-gray-50 text-gray-800">
                                     <option className="text-gray-800">Customer</option>
                                     <option className="text-gray-800">Vendor</option>
+                                    <option className="text-gray-800">Admin</option>
                                     
                                 </select>
                             </div>

@@ -1,5 +1,6 @@
 
 import Banner from "./Banner";
+import Blog from "./Blog";
 import Categoris from "./Categoris";
 import Discount from "./Discount";
 import Features from "./Features";
@@ -19,6 +20,7 @@ const Home = () => {
             <Features></Features>
             <WhyChoose></WhyChoose>
             <TopPerformance></TopPerformance>
+            {/* <Blog></Blog> */}
             <Discount></Discount>
         </div>
     );

@@ -10,7 +10,7 @@ const Categoris = () => {
     ];
 
     return (
-        <div className="flex flex-wrap justify-center gap-6 p-6 py-44">
+        <div className="md:flex grid grid-cols-2 flex-wrap justify-center  gap-6 p-6 py-44">
             {categories.map((category, index) => (
                 <motion.div
                     key={index}
@@ -21,9 +21,9 @@ const Categoris = () => {
                     transition={{ duration: 0.2, ease: "easeOut" }}
                     className="bg-gradient-to-r from-color2 from-10% via-color4 via-30% to-color4 to-90%  p-[4px] rounded-xl"
                 >
-                    <div className="w-56 h-72 bg-white  rounded-xl flex flex-col items-center justify-center   border-color1 p-4 cursor-pointer">
+                    <div className="md:w-56 h-64  md:h-72 bg-white  rounded-xl flex flex-col items-center justify-center   border-color1 p-4 cursor-pointer">
                         <div className="bg-slate-200 mb-5 p-4 rounded-full"><img src={category.icon} alt={category.name} className="w-12 h-12" /></div>
-                        <h3 className="text-lg text-center font-semibold mt-3">{category.name}</h3>
+                        <h3 className="md:text-lg font-Montserrat text-center font-semibold mt-3">{category.name}</h3>
                         <p className="text-gray-500 text-sm">{category.count} Items</p>
                     </div>
                 </motion.div>
