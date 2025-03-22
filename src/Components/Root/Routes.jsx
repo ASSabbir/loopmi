@@ -1,7 +1,7 @@
 import {
-    createBrowserRouter,
-    
-  } from "react-router-dom";
+  createBrowserRouter,
+
+} from "react-router-dom";
 import Root from "./Root";
 import Home from "../Home/Home";
 import Login from "../Log/Login";
@@ -24,80 +24,90 @@ import Admin_items from "../Admin/Admin_items";
 import Admin_Analytics from "../Admin/Admin_Analytics";
 import ViewAllItem from "../Vendor/ViewAllItem";
 import ConfirmOrdr from "../Vendor/ConfirmOrdr";
+import VendorRegister from "../Log/VendorRegister";
+import Profile from "../Log/Profile";
 
 const Routes = createBrowserRouter([
-    {
-      path: "/",
-      element: <Root></Root>,
-      children:[
-        {
-            path:'/',
-            element:<Home></Home>
-        },
-        {
-            path:'/cart',
-            element:<UserPrivate><Cart></Cart></UserPrivate>
-        },
-        {
-            path:'/item/:id',
-            element:<UserPrivate><ShopCard></ShopCard></UserPrivate>
-        },
-        {
-            path:'/shop',
-            element:<Shop></Shop>
-        },
-        {
-            path:'/login',
-            element:<Login></Login>
-        },
-        {
-            path:'/register',
-            element:<Register></Register>
-        },
-        {
-          path:'/admin_panel',
-          element:<AdminDashBoard></AdminDashBoard>,
-          children:[
-            {
-              path:'admin_view_users',
-              element:<Admin_users></Admin_users>,
-            },
-            {
-              path:'admin_view_orders',
-              element:<Admin_orders></Admin_orders>
+  {
+    path: "/",
+    element: <Root></Root>,
+    children: [
+      {
+        path: '/',
+        element: <Home></Home>
+      },
+      {
+        path: '/cart',
+        element: <UserPrivate><Cart></Cart></UserPrivate>
+      },
+      {
+        path: '/item/:id',
+        element: <UserPrivate><ShopCard></ShopCard></UserPrivate>
+      },
+      {
+        path: '/shop',
+        element: <Shop></Shop>
+      },
+      {
+        path: '/login',
+        element: <Login></Login>
+      },
+      {
+        path: '/register',
+        element: <Register></Register>
+      },
+      {
+        path: '/profile',
+        element: <UserPrivate><Profile></Profile></UserPrivate>
+      },
+      {
+        path: '/vendor_register',
+        element: <VendorRegister></VendorRegister>
+      },
+      {
+        path: '/admin_panel',
+        element: <AdminDashBoard></AdminDashBoard>,
+        children: [
+          {
+            path: 'admin_view_users',
+            element: <Admin_users></Admin_users>,
+          },
+          {
+            path: 'admin_view_orders',
+            element: <Admin_orders></Admin_orders>
 
-            },{
-              path:'admin_view_items',
-              element:<Admin_items></Admin_items>
-            },{
-              path:'admin_view_analytics',
-              element:<Admin_Analytics></Admin_Analytics>
+          }, {
+            path: 'admin_view_items',
+            element: <Admin_items></Admin_items>
+          }, {
+            path: 'admin_view_analytics',
+            element: <Admin_Analytics></Admin_Analytics>
 
-            },
-            
-          ]
-        },
-        {
-            path:'/dashboard',
-            element:<VendorPrivate><Desboard></Desboard></VendorPrivate>,
-            children:[
-              {
-                path:'add_item',
-                element:<Add_items></Add_items>
-              },{
-                path:'view_all_items',
-                element:<ViewAllItem></ViewAllItem>
-              },{
-                path:'orders',
-                element:<ViewOrderedItems></ViewOrderedItems>
-              },{
-                path:'confirm_order',
-                element:<ConfirmOrdr></ConfirmOrdr>
-              }
-            ]
-        }
-      ]
-    },
-  ]);
+          },
+
+        ]
+      },
+      {
+        path: '/dashboard',
+        element: <VendorPrivate><Desboard></Desboard></VendorPrivate>,
+        children: [
+          {
+            path: 'add_item',
+            element: <Add_items></Add_items>
+          }, {
+            path: 'view_all_items',
+            element: <ViewAllItem></ViewAllItem>
+          }, {
+            path: 'orders',
+            element: <ViewOrderedItems></ViewOrderedItems>
+          }, {
+            path: 'confirm_order',
+            element: <ConfirmOrdr></ConfirmOrdr>
+          }
+        ]
+      }
+    ]
+  },
+]);
 
 export default Routes;

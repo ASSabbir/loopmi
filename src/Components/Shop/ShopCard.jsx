@@ -20,7 +20,7 @@ const ShopCard = () => {
         setCartCount(savedCart.length)
     }, [])
     const { id } = useParams()
-    console.log(id)
+    
     const [users] = useRole()
 
     const { data, isLoading } = useQuery({
@@ -39,7 +39,7 @@ const ShopCard = () => {
         },
         enabled: !!id
     })
-    console.log(relatedItems)
+    
 
     if (!users || isLoading) {
         return <div className='flex items-center justify-center w-full pt-2 h-screen'>
@@ -67,6 +67,55 @@ const ShopCard = () => {
             title: "Add To Card"
         });
     }
+    const handleAddReview = (item) => {
+        Swal.fire({
+            title: "Add a Review",
+            html: `
+            <textarea id="review-text" class="swal2-input" 
+    placeholder="Write your review..." 
+    style="height: 100px; border: 2px solid #ccc; border-radius: 5px; padding: 5px;"></textarea>
+
+<select id="review-rating" class="swal2-input">
+    <option value="5">⭐️⭐️⭐️⭐️⭐️ (5)</option>
+    <option value="4">⭐️⭐️⭐️⭐️ (4)</option>
+    <option value="3">⭐️⭐️⭐️ (3)</option>
+    <option value="2">⭐️⭐️ (2)</option>
+    <option value="1">⭐️ (1)</option>
+</select>
+          `,
+            showCancelButton: true,
+            confirmButtonText: "Submit",
+            preConfirm: () => {
+                const reviewText = document.getElementById("review-text").value;
+                const rating = document.getElementById("review-rating").value;
+
+                if (!reviewText.trim()) {
+                    Swal.showValidationMessage("Review cannot be empty!");
+                    return false;
+                }
+
+                return { reviewText, rating };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                
+                
+                const review={
+                    review:result.value.reviewText,
+                    rating:result.value.rating,
+                    user:users,
+                    product:item
+
+                }
+                console.log(review)
+                axios.post('http://localhost:5000/reviews',review)
+                .then(()=>{
+                    Swal.fire("Thank You!", "Your review has been submitted.", "success");
+                })
+                // 👉 You can send `result.value` (reviewText & rating) to your backend here.
+            }
+        });
+    };
     return (
         <div className="mt-20">
             <section className="text-gray-800   relative overflow-hidden">
@@ -113,7 +162,7 @@ const ShopCard = () => {
             </section>
             <div className="max-w-screen-2xl my-7 gap-7 mx-auto flex md:flex-row flex-col ">
                 <img src={data.photo} alt="" className=" rounded-lg md:h-[600px] object-cover md:w-[60%]" />
-                <div className=" bg-gray-100 rounded-lg p-8 md:w-[40%] ">
+                <div className=" bg-gray-100 rounded-lg flex flex-col justify-between p-8 md:w-[40%] ">
                     <h1 className="text-2xl font-bold">Price : ${data.price}</h1>
                     <div className="divider"></div>
                     <h1>{data.description}</h1>
@@ -133,49 +182,51 @@ const ShopCard = () => {
 
                     }
 
-
+                    <div className="flex justify-end">
+                        <button onClick={()=>handleAddReview(data)} className="bg-color5 w-fit  p-1 text-sm  text-white mt-10">Add Review </button>
+                    </div>
                 </div>
             </div>
             <div className="max-w-screen-2xl my-7  mx-auto  ">
                 <h1 className="text-4xl font-bold mb-10 mt-16">You May Also Like </h1>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-7">
-                {relatedItems?.map((item, index) => (
-                    <Link to={`/item/${item._id}`}
-                        key={index}
-                        className="card h-96 bg-white border-[1px]    rounded-2xl shadow-sm   w- cursor-pointer">
-                        <figure className='md:h-40 lg:h-64 h-24'>
-                            <img
-                                src={item.photo}
-                                alt={item.title}
-                                className='object-cover object-center h-full w-full '
-                            />
-                        </figure>
-                        <div className="md:p-5 p-2 flex flex-col md:gap-2 justify-between   rounded-b-lg ">
-                            <h2 className="font-bold font-Open_Sans">{item.title || "Default Title"}</h2>
-                            <div className='flex justify-between mt-3'>
-                                <h1 className='hidden md:flex'>by {item.vendorUsername}</h1>
-                                <h1 className='font-semibold'>${item.price}</h1>
+                    {relatedItems?.map((item, index) => (
+                        <Link to={`/item/${item._id}`}
+                            key={index}
+                            className="card h-96 bg-white border-[1px]    rounded-2xl shadow-sm   w- cursor-pointer">
+                            <figure className='md:h-40 lg:h-64 h-24'>
+                                <img
+                                    src={item.photo}
+                                    alt={item.title}
+                                    className='object-cover object-center h-full w-full '
+                                />
+                            </figure>
+                            <div className="md:p-5 p-2 flex flex-col md:gap-2 justify-between   rounded-b-lg ">
+                                <h2 className="font-bold font-Open_Sans">{item.title || "Default Title"}</h2>
+                                <div className='flex justify-between mt-3'>
+                                    <h1 className='hidden md:flex'>by {item.vendorUsername}</h1>
+                                    <h1 className='font-semibold'>${item.price}</h1>
 
-                            </div>
-                            <div className="divider hidden md:flex"></div>
-                            <h1 className='hidden md:flex'>Category : {item.category}</h1>
-                            <div className=' '>
-                                <div className="rating rating-xs">
-                                    <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
-                                    <input
-                                        type="radio"
-                                        name="rating-5"
-                                        className="mask mask-star-2 bg-orange-400"
-                                        defaultChecked />
-                                    <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
-                                    <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
-                                    <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
                                 </div>
+                                <div className="divider hidden md:flex"></div>
+                                <h1 className='hidden md:flex'>Category : {item.category}</h1>
+                                <div className=' '>
+                                    <div className="rating rating-xs">
+                                        <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                                        <input
+                                            type="radio"
+                                            name="rating-5"
+                                            className="mask mask-star-2 bg-orange-400"
+                                            defaultChecked />
+                                        <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                                        <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                                        <input type="radio" name="rating-5" className="mask mask-star-2 bg-orange-400" />
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
-                    </Link>
-                ))}
+                        </Link>
+                    ))}
                 </div>
             </div>
 

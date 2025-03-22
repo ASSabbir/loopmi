@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import  { createContext, useEffect, useState } from 'react';
 
 import { GoogleAuthProvider } from "firebase/auth";
@@ -53,6 +53,12 @@ const AuthProvider = ({children}) => {
     const googleSign =()=>{
         return signInWithPopup(auth,provider)
     }
+    const emailVarification =()=>{
+        return sendEmailVerification(auth.currentUser)
+    }
+    const forgetPassword=(email)=>{
+        return sendPasswordResetEmail(auth, email)
+    }
 
     const data={
         
@@ -60,7 +66,8 @@ const AuthProvider = ({children}) => {
         handelSignup,
         handelSignin,
         user,
-        
+        emailVarification,
+        forgetPassword,
         logout,
         googleSign,
         handelUpdateUser,

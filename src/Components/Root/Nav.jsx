@@ -14,11 +14,7 @@ const Nav = () => {
     const navg=useNavigate()
     const [users, isLoading] = useRole()
     
-    if (isLoading) {
-        return <div className='flex items-center justify-center w-full pt-2 h-screen'>
-            <span className="loading loading-bars loading-lg"></span>
-        </div>
-    }
+    
     console.log(users)
     const Toast = Swal.mixin({
         toast: true,
@@ -35,11 +31,11 @@ const Nav = () => {
     const navlink = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/shop'}>Shop</Link></li>
-        {users.role == 'Vendor' &&
+        {users?.role == 'Vendor' &&
            <li> <Link to={'/dashboard/add_item'}  >Vendor Dashboard</Link></li>
 
         }
-        {users.role == 'Admin' &&
+        {users?.role == 'Admin' &&
             <li><Link to={'/admin_panel/admin_view_users'} >Admin Panel</Link></li>
         }
     </>
@@ -118,6 +114,7 @@ const Nav = () => {
                             <div className="dropdown dropdown-bottom dropdown-end">
                                 <div tabIndex={0} role="button" className=" m-1"><img alt="" className="w-10 h-10 object-cover rounded-full ring-2 ring-offset-4 bg-gray-500 ring-color5 ring-offset-gray-100" src={user.photoURL} /></div>
                                 <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                    <li><Link to={'/profile'}>Profile</Link></li>
                                     <li><button onClick={handelLogout}>Log Out</button></li>
                                 </ul>
                             </div>
