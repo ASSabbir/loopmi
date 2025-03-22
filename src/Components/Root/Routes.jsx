@@ -27,6 +27,8 @@ import ConfirmOrdr from "../Vendor/ConfirmOrdr";
 import VendorRegister from "../Log/VendorRegister";
 import Profile from "../Log/Profile";
 import Become_Vendor from "../Become_Vendor/Become_Vendor";
+import My_Orders from "../My_Orders/My_Orders";
+import Support from "../Support/Support";
 
 const Routes = createBrowserRouter([
   {
@@ -66,8 +68,16 @@ const Routes = createBrowserRouter([
         element: <VendorRegister></VendorRegister>
       },
       {
-        path:'/become_vendor',
-        element:<Become_Vendor></Become_Vendor>
+        path: '/become_vendor',
+        element: <UserPrivate><Become_Vendor></Become_Vendor></UserPrivate>
+      },
+      {
+        path: '/my-orders',
+        element: <UserPrivate><My_Orders></My_Orders></UserPrivate>
+      },
+      {
+        path: '/support',
+        element: <Support></Support>
       },
       {
         path: '/admin_panel',
