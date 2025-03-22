@@ -10,7 +10,7 @@ const Categoris = () => {
     ];
 
     return (
-        <div className="md:flex grid grid-cols-2 flex-wrap justify-center  gap-6 p-6 py-44">
+        <div className="md:flex grid grid-cols-2 flex-wrap justify-center  gap-6 p-6 py-20">
             {categories.map((category, index) => (
                 <motion.div
                     key={index}
