@@ -26,6 +26,7 @@ import ViewAllItem from "../Vendor/ViewAllItem";
 import ConfirmOrdr from "../Vendor/ConfirmOrdr";
 import VendorRegister from "../Log/VendorRegister";
 import Profile from "../Log/Profile";
+import Become_Vendor from "../Become_Vendor/Become_Vendor";
 
 const Routes = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const Routes = createBrowserRouter([
       {
         path: '/vendor_register',
         element: <VendorRegister></VendorRegister>
+      },
+      {
+        path:'/become_vendor',
+        element:<Become_Vendor></Become_Vendor>
       },
       {
         path: '/admin_panel',

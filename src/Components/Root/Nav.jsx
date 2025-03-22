@@ -198,7 +198,7 @@ const Nav = () => {
                             <div tabIndex={0} role="button" className="m-1"><img alt="" className="w-10 h-10 object-cover rounded-full ring-2 ring-offset-4 bg-gray-500 ring-color5 ring-offset-gray-100" src={user.photoURL} /></div>
                             <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
                                 <li><Link to={'/profile'}>Profile</Link></li>
-                                <li><Link to={'/sell-product'}>Sell Your Product</Link></li>
+                                <li><Link to={'/become_vendor'}>Sell Your Product</Link></li>
                                 {user && <li><Link to={'/my-orders'}>My Orders</Link></li>}
                                 <li><Link to={'/support'}>Support</Link></li>
                                 <li><button onClick={handelLogout}>Log Out</button></li>
