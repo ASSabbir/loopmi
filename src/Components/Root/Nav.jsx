@@ -2,19 +2,17 @@ import './style.css'
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png'
 import { FaUser } from 'react-icons/fa';
-
 import { IoMdCart } from 'react-icons/io';
 import { useContext } from 'react';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
-import { MdDashboard } from 'react-icons/md';
 import useRole from './useRole';
+
 const Nav = () => {
     const { user, logout, cartCount } = useContext(AuthContext)
-    const navg=useNavigate()
+    const navg = useNavigate()
     const [users, isLoading] = useRole()
-    
-    
+
     console.log(users)
     const Toast = Swal.mixin({
         toast: true,
@@ -28,15 +26,112 @@ const Nav = () => {
         }
     });
 
+    // Category definitions with subcategories
+    const categories = [
+        {
+            name: "Electronics",
+            path: "/categories/electronics",
+            subcategories: [
+                { name: "Smartphones", path: "/categories/electronics/smartphones" },
+                { name: "Laptops", path: "/categories/electronics/laptops" },
+                { name: "Audio", path: "/categories/electronics/audio" },
+                { name: "Home Appliances", path: "/categories/electronics/home-appliances" }
+            ]
+        },
+        {
+            name: "Fashion",
+            path: "/categories/fashion",
+            subcategories: [
+                { name: "Men's Clothing", path: "/categories/fashion/mens-clothing" },
+                { name: "Women's Clothing", path: "/categories/fashion/womens-clothing" },
+                { name: "Accessories", path: "/categories/fashion/accessories" },
+                { name: "Footwear", path: "/categories/fashion/footwear" }
+            ]
+        },
+        {
+            name: "Home & Garden",
+            path: "/categories/home-garden",
+            subcategories: [
+                { name: "Furniture", path: "/categories/home-garden/furniture" },
+                { name: "Kitchen", path: "/categories/home-garden/kitchen" },
+                { name: "Gardening", path: "/categories/home-garden/gardening" },
+                { name: "Decor", path: "/categories/home-garden/decor" }
+            ]
+        },
+        {
+            name: "Sports & Outdoors",
+            path: "/categories/sports-outdoors",
+            subcategories: [
+                { name: "Exercise Equipment", path: "/categories/sports-outdoors/exercise" },
+                { name: "Outdoor Gear", path: "/categories/sports-outdoors/outdoor-gear" },
+                { name: "Sporting Goods", path: "/categories/sports-outdoors/sporting-goods" }
+            ]
+        },
+        {
+            name: "Books & Media",
+            path: "/categories/books-media",
+            subcategories: [
+                { name: "Books", path: "/categories/books-media/books" },
+                { name: "Movies", path: "/categories/books-media/movies" },
+                { name: "Music", path: "/categories/books-media/music" }
+            ]
+        }
+    ];
+
+    // Updated navigation links as requested
     const navlink = <>
         <li><Link to={'/'}>Home</Link></li>
-        <li><Link to={'/shop'}>Shop</Link></li>
-        {users?.role == 'Vendor' &&
-           <li> <Link to={'/dashboard/add_item'}  >Vendor Dashboard</Link></li>
 
+        {/* Simple Categories link for mobile */}
+        <li className="lg:hidden"><Link to={'/'}>Categories</Link></li>
+
+        {/* Desktop Categories with megamenu - only visible on larger screens */}
+        <li className="dropdown dropdown-hover hidden lg:block">
+            <Link to={'/'} tabIndex={0} className="">Categories</Link>
+            <div tabIndex={0} className="dropdown-content z-[100] bg-base-100 shadow-xl rounded-box absolute mt-2 " style={{ width: '1000px', left: '-400px' }}>
+                <div className="bg-base-100 p-4 ">
+
+                    <div className="grid grid-cols-5 gap-4 ">
+                        {categories.map((category, index) => (
+                            <div key={index} className="flex flex-col">
+                                <Link to={category.path} className="font-bold text-color5 mb-2 hover:underline">
+                                    {category.name}
+                                </Link>
+                                <ul className="space-y-1">
+                                    {category.subcategories.map((subcat, idx) => (
+                                        <li key={idx}>
+                                            <Link to={subcat.path} className="text-sm hover:text-color5 transition-colors">
+                                                {subcat.name}
+                                            </Link>
+                                        </li>
+                                    ))}
+                                    <li>
+                                        <Link to={category.path} className="text-sm text-color5 hover:underline">
+                                            View All →
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-gray-200 text-center">
+                        <Link to="/categories" className="font-semibold text-color5 hover:underline">
+                            Browse All Categories
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </li>
+        <li><Link to={'/shop'}>Shop</Link></li>
+
+
+
+        {/* Keep existing role-specific navigation */}
+        {users?.role === 'Vendor' &&
+            <li><Link to={'/dashboard/add_item'}>Vendor Dashboard</Link></li>
         }
-        {users?.role == 'Admin' &&
-            <li><Link to={'/admin_panel/admin_view_users'} >Admin Panel</Link></li>
+        {users?.role === 'Admin' &&
+            <li><Link to={'/admin_panel/admin_view_users'}>Admin Panel</Link></li>
         }
     </>
 
@@ -56,7 +151,6 @@ const Nav = () => {
     }
 
     return (
-
         <div className='fixed w-full bg-white z-50 top-0'>
             <div className="max-w-screen-2xl py-5 mx-auto navbar ">
                 <div className="navbar-start">
@@ -81,7 +175,7 @@ const Nav = () => {
                             {navlink}
                         </ul>
                     </div>
-                    <div className='flex justify-center items-center'>
+                    <div className='flex justify-center items-center cursor-pointer' onClick={() => navg('/')}>
                         <img src={logo} alt="" className='w-14' />
                         <h1 className='text-2xl font-bold '>loopmi</h1>
                     </div>
@@ -92,37 +186,27 @@ const Nav = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-3">
-                    <Link to={'/cart'} id='button' className='p-2 relative  n rounded-full text-white text-xl'><IoMdCart />
-
-                        {
-                            cartCount > 0 &&
-                            <span className="absolute -top-3 rounded-3xl w-5 h-5 flex justify-center items-center text-sm -right-2  bg-red-400 ">{cartCount}
+                    <Link to={'/cart'} id='button' className='p-2 relative n rounded-full text-white text-xl'><IoMdCart />
+                        {cartCount > 0 &&
+                            <span className="absolute -top-3 rounded-3xl w-5 h-5 flex justify-center items-center text-sm -right-2 bg-red-400">{cartCount}
                             </span>
                         }
                     </Link>
 
-
-                    {/* {users.role == 'Vendor' &&
-                        <Link to={'/dashboard/add_item'} id='button' className='p-2 rounded-full text-white text-xl'><MdDashboard /></Link>
-
+                    {user ?
+                        <div className="dropdown dropdown-bottom dropdown-end">
+                            <div tabIndex={0} role="button" className="m-1"><img alt="" className="w-10 h-10 object-cover rounded-full ring-2 ring-offset-4 bg-gray-500 ring-color5 ring-offset-gray-100" src={user.photoURL} /></div>
+                            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                <li><Link to={'/profile'}>Profile</Link></li>
+                                <li><Link to={'/sell-product'}>Sell Your Product</Link></li>
+                                {user && <li><Link to={'/my-orders'}>My Orders</Link></li>}
+                                <li><Link to={'/support'}>Support</Link></li>
+                                <li><button onClick={handelLogout}>Log Out</button></li>
+                            </ul>
+                        </div>
+                        :
+                        <Link to={'/login'} id='button' className='p-2 rounded-full text-white text-xl'><FaUser /></Link>
                     }
-                    {users.role == 'Admin' &&
-                        <Link to={'/admin_panel/admin_view_users'} id='button' className='px-2 p-1 text-sm rounded-full text-white bg-color4'>Admin Panel</Link>
-                    } */}
-                    {
-                        user ?
-                            <div className="dropdown dropdown-bottom dropdown-end">
-                                <div tabIndex={0} role="button" className=" m-1"><img alt="" className="w-10 h-10 object-cover rounded-full ring-2 ring-offset-4 bg-gray-500 ring-color5 ring-offset-gray-100" src={user.photoURL} /></div>
-                                <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
-                                    <li><Link to={'/profile'}>Profile</Link></li>
-                                    <li><button onClick={handelLogout}>Log Out</button></li>
-                                </ul>
-                            </div>
-
-                            :
-                            <Link to={'/login'} id='button' className='p-2 rounded-full text-white text-xl'><FaUser /></Link>
-                    }
-
                 </div>
             </div>
         </div>
