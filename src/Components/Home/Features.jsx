@@ -5,8 +5,8 @@ import useItem from "../Root/useItem";
 const Features = () => {
     const [items] = useItem()
     return (
-        <div className="py-32 md:h-screen">
-            <div className="relative h-full w-full bg-white">
+        <div className="py-32 md:min-h-screen bg-white">
+            <div className="relative h-full w-full max-w-7xl mx-auto container">
                 {/* Background */}
                 <div className="absolute h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] 
             [background-size:16px_16px] 
