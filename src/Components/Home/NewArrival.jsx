@@ -11,6 +11,8 @@ const NewArrival = () => {
 
     return (
         <section className="text-gray-800   relative overflow-hidden">
+            <div className="max-w-7xl mx-auto container">
+
             {/* Background Gradient Blur Divs */}
             <div className="absolute inset-0 flex justify-center">
                 <div className="w-[450px] h-[300px] bg-color3 blur-[100px] rounded-full absolute right-20 top-1/2 -z-10"></div>
@@ -108,6 +110,7 @@ const NewArrival = () => {
                                 },
                             }}
                         />
+            </div>
         </section>
     );
 };
