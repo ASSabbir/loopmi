@@ -58,7 +58,7 @@ const Recommended = () => {
                         {products.map((product) => (
                             <div key={product._id} className="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-xl transition-shadow duration-300">
                                 <div className="relative overflow-hidden">
-                                    <Link to={`/product/${product._id}`}>
+                                    <Link to={`/item/${product._id}`}>
                                         <img 
                                             src={product.photo || 'https://via.placeholder.com/300'}
                                             alt={product.title}
@@ -79,7 +79,7 @@ const Recommended = () => {
                                     )}
                                 </div>
                                 <div className="p-4">
-                                    <Link to={`/product/${product._id}`}>
+                                    <Link to={`/item/${product._id}`}>
                                         <h3 className="font-semibold text-lg mb-1 hover:text-color5 transition-colors">
                                             {product.title}
                                         </h3>
