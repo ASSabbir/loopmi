@@ -128,10 +128,10 @@ const HomeSearch = () => {
     };
 
     return (
-        <div className="py-8 bg-base-100">
+        <div className="py-8 bg-base-100 ">
             <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto">
-                    <form onSubmit={handleSearch} className="bg-white rounded-lg shadow-lg p-6">
+                <div className="max-w-4xl mx-auto ">
+                    <form onSubmit={handleSearch} className="bg-color5/20 rounded-lg shadow-lg p-6">
                         <div className="flex flex-col md:flex-row gap-4">
                             <div className="flex-grow relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
