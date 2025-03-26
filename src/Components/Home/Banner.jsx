@@ -1,4 +1,4 @@
-import { CiSearch } from 'react-icons/ci';
+
 import './style.css'
 import img1 from '../../assets/4.jpg'
 import img2 from '../../assets/3.jpg'

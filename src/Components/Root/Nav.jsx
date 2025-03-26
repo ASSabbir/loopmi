@@ -7,12 +7,12 @@ import { IoMdCart } from 'react-icons/io';
 import { useContext } from 'react';
 import { AuthContext } from './AuthProvider';
 import Swal from 'sweetalert2';
-import { MdDashboard } from 'react-icons/md';
+
 import useRole from './useRole';
 const Nav = () => {
     const { user, logout, cartCount } = useContext(AuthContext)
     const navg=useNavigate()
-    const [users, isLoading] = useRole()
+    const [users] = useRole()
     
     
     console.log(users)
@@ -31,9 +31,9 @@ const Nav = () => {
     const navlink = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/shop'}>Shop</Link></li>
+        <li><Link to={'/contact_us'}>Contact Us</Link></li>
         {users?.role == 'Vendor' &&
            <li> <Link to={'/dashboard/add_item'}  >Vendor Dashboard</Link></li>
-
         }
         {users?.role == 'Admin' &&
             <li><Link to={'/admin_panel/admin_view_users'} >Admin Panel</Link></li>

@@ -26,6 +26,7 @@ import ViewAllItem from "../Vendor/ViewAllItem";
 import ConfirmOrdr from "../Vendor/ConfirmOrdr";
 import VendorRegister from "../Log/VendorRegister";
 import Profile from "../Log/Profile";
+import ContactUs from "../Home/ContactUs";
 
 const Routes = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const Routes = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>
+      },
+      {
+        path: '/contact_us',
+        element: <ContactUs></ContactUs>
       },
       {
         path: '/profile',

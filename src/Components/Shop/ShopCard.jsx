@@ -187,6 +187,27 @@ const ShopCard = () => {
                     </div>
                 </div>
             </div>
+            <div className="max-w-screen-2xl my-7 gap-7 mx-auto flex md:flex-row flex-col ">
+                <div className=" bg-gray-100 rounded-lg p-8 md:w-[60%] ">
+                    <h1 className="text-2xl font-bold">Vendor Details</h1>
+                    <div className="divider"></div>
+                    <h1><span className="font-semibold">Vendor Name</span> : {data.vendorUsername} </h1>
+                    <h1 className="mt-2"><span className="font-semibold">Vendor Email</span> : {data.vendorEmail} </h1>
+                    <h1 className="mt-2"><span className="font-semibold">Vendor Phone</span> : {data.vendorPhone} </h1>
+                    <h1 className="mt-2"><span className="font-semibold">Vendor Location</span> : {data.vendorLocation} </h1>
+                    <div className="divider"></div>
+                </div>
+                <div className=" bg-gray-100 rounded-lg p-8 md:w-[40%] ">
+                    <h1 className="text-2xl font-bold">Product Details</h1>
+                    <div className="divider"></div>
+                    <h1><span className="font-semibold">Category</span> : {data.category} </h1>
+                    <h1 className="mt-2"><span className="font-semibold">Condition</span> : {data.condition} </h1>
+                    <h1 className="mt-2"><span className="font-semibold">Location</span> : {data.location} </h1>
+                    <h1 className="mt-2"><span className="font-semibold">Price</span> : ${data.price} </h1>
+                    <div className="divider"></div>
+                </div>
+
+            </div>
             <div className="max-w-screen-2xl my-7  mx-auto  ">
                 <h1 className="text-4xl font-bold mb-10 mt-16">You May Also Like </h1>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-7">
@@ -230,27 +251,7 @@ const ShopCard = () => {
                 </div>
             </div>
 
-            {/* <div className="max-w-screen-2xl my-7 gap-7 mx-auto flex md:flex-row flex-col ">
-                <div className=" bg-gray-100 rounded-lg p-8 md:w-[60%] ">
-                    <h1 className="text-2xl font-bold">Vendor Details</h1>
-                    <div className="divider"></div>
-                    <h1><span className="font-semibold">Vendor Name</span> : {data.vendorUsername} </h1>
-                    <h1 className="mt-2"><span className="font-semibold">Vendor Email</span> : {data.vendorEmail} </h1>
-                    <h1 className="mt-2"><span className="font-semibold">Vendor Phone</span> : {data.vendorPhone} </h1>
-                    <h1 className="mt-2"><span className="font-semibold">Vendor Location</span> : {data.vendorLocation} </h1>
-                    <div className="divider"></div>
-                </div>
-                <div className=" bg-gray-100 rounded-lg p-8 md:w-[40%] ">
-                    <h1 className="text-2xl font-bold">Product Details</h1>
-                    <div className="divider"></div>
-                    <h1><span className="font-semibold">Category</span> : {data.category} </h1>
-                    <h1 className="mt-2"><span className="font-semibold">Condition</span> : {data.condition} </h1>
-                    <h1 className="mt-2"><span className="font-semibold">Location</span> : {data.location} </h1>
-                    <h1 className="mt-2"><span className="font-semibold">Price</span> : ${data.price} </h1>
-                    <div className="divider"></div>
-                </div>
-
-            </div> */}
+            
         </div>
     );
 };
